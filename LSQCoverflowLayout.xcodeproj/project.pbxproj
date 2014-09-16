@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00737BC319C21FD50012FA53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00737BC219C21FD50012FA53 /* Foundation.framework */; };
+		00737BCA19C21FD50012FA53 /* LSQCoverflowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 00737BC919C21FD50012FA53 /* LSQCoverflowLayout.m */; };
+		00737BD119C21FD50012FA53 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00737BD019C21FD50012FA53 /* XCTest.framework */; };
+		00737BD219C21FD50012FA53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00737BC219C21FD50012FA53 /* Foundation.framework */; };
+		00737BD419C21FD50012FA53 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00737BD319C21FD50012FA53 /* UIKit.framework */; };
+		00737BD719C21FD50012FA53 /* libLSQCoverflowLayout.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00737BBF19C21FD50012FA53 /* libLSQCoverflowLayout.a */; };
+		00737BDD19C21FD50012FA53 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00737BDB19C21FD50012FA53 /* InfoPlist.strings */; };
+		00737BDF19C21FD50012FA53 /* LSQCoverflowLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00737BDE19C21FD50012FA53 /* LSQCoverflowLayoutTests.m */; };
+		00737BF119C229120012FA53 /* BSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00737BED19C229120012FA53 /* BSpline.cpp */; };
+		00737BF219C229120012FA53 /* BSplineBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00737BEF19C229120012FA53 /* BSplineBase.cpp */; };
+		00737C0F19C2389F0012FA53 /* LSQCoverflowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 00737BC719C21FD50012FA53 /* LSQCoverflowLayout.h */; };
+		00737C1419C2420C0012FA53 /* SplineInterpolator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00737C1219C2420C0012FA53 /* SplineInterpolator.cpp */; };
+		00737C1719C24F070012FA53 /* BSplineLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00737C1619C24F070012FA53 /* BSplineLib.cpp */; };
+		009FA52B19C2654F0052ED2E /* LSQCoverflowCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = 009FA52919C2654F0052ED2E /* LSQCoverflowCellView.h */; };
+		009FA52C19C2654F0052ED2E /* LSQCoverflowCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FA52A19C2654F0052ED2E /* LSQCoverflowCellView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00737BD519C21FD50012FA53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00737BB719C21FD50012FA53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 00737BBE19C21FD50012FA53;
+			remoteInfo = LSQCoverflowLayout;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00737BBF19C21FD50012FA53 /* libLSQCoverflowLayout.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLSQCoverflowLayout.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		00737BC219C21FD50012FA53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		00737BC619C21FD50012FA53 /* LSQCoverflowLayout-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LSQCoverflowLayout-Prefix.pch"; sourceTree = "<group>"; };
+		00737BC719C21FD50012FA53 /* LSQCoverflowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSQCoverflowLayout.h; sourceTree = "<group>"; };
+		00737BC919C21FD50012FA53 /* LSQCoverflowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSQCoverflowLayout.m; sourceTree = "<group>"; };
+		00737BCF19C21FD50012FA53 /* LSQCoverflowLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LSQCoverflowLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00737BD019C21FD50012FA53 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		00737BD319C21FD50012FA53 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		00737BDA19C21FD50012FA53 /* LSQCoverflowLayoutTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LSQCoverflowLayoutTests-Info.plist"; sourceTree = "<group>"; };
+		00737BDC19C21FD50012FA53 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		00737BDE19C21FD50012FA53 /* LSQCoverflowLayoutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSQCoverflowLayoutTests.m; sourceTree = "<group>"; };
+		00737BED19C229120012FA53 /* BSpline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BSpline.cpp; path = Libraries/BSpline/BSpline/BSpline.cpp; sourceTree = SOURCE_ROOT; };
+		00737BEE19C229120012FA53 /* BSpline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSpline.h; path = Libraries/BSpline/BSpline/BSpline.h; sourceTree = SOURCE_ROOT; };
+		00737BEF19C229120012FA53 /* BSplineBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BSplineBase.cpp; path = Libraries/BSpline/BSpline/BSplineBase.cpp; sourceTree = SOURCE_ROOT; };
+		00737BF019C229120012FA53 /* BSplineBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSplineBase.h; path = Libraries/BSpline/BSpline/BSplineBase.h; sourceTree = SOURCE_ROOT; };
+		00737C1219C2420C0012FA53 /* SplineInterpolator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplineInterpolator.cpp; sourceTree = "<group>"; };
+		00737C1319C2420C0012FA53 /* SplineInterpolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplineInterpolator.h; sourceTree = "<group>"; };
+		00737C1619C24F070012FA53 /* BSplineLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BSplineLib.cpp; path = Libraries/BSpline/BSpline/BSplineLib.cpp; sourceTree = SOURCE_ROOT; };
+		009FA52919C2654F0052ED2E /* LSQCoverflowCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSQCoverflowCellView.h; sourceTree = "<group>"; };
+		009FA52A19C2654F0052ED2E /* LSQCoverflowCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSQCoverflowCellView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00737BBC19C21FD50012FA53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00737BC319C21FD50012FA53 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00737BCC19C21FD50012FA53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00737BD119C21FD50012FA53 /* XCTest.framework in Frameworks */,
+				00737BD419C21FD50012FA53 /* UIKit.framework in Frameworks */,
+				00737BD719C21FD50012FA53 /* libLSQCoverflowLayout.a in Frameworks */,
+				00737BD219C21FD50012FA53 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00737BB619C21FD50012FA53 = {
+			isa = PBXGroup;
+			children = (
+				00737BC419C21FD50012FA53 /* Code */,
+				00737BD819C21FD50012FA53 /* Tests */,
+				00737BC119C21FD50012FA53 /* Frameworks */,
+				00737BC019C21FD50012FA53 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		00737BC019C21FD50012FA53 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00737BBF19C21FD50012FA53 /* libLSQCoverflowLayout.a */,
+				00737BCF19C21FD50012FA53 /* LSQCoverflowLayoutTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00737BC119C21FD50012FA53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00737BC219C21FD50012FA53 /* Foundation.framework */,
+				00737BD019C21FD50012FA53 /* XCTest.framework */,
+				00737BD319C21FD50012FA53 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		00737BC419C21FD50012FA53 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				00737C1319C2420C0012FA53 /* SplineInterpolator.h */,
+				00737C1219C2420C0012FA53 /* SplineInterpolator.cpp */,
+				00737BC719C21FD50012FA53 /* LSQCoverflowLayout.h */,
+				00737BC919C21FD50012FA53 /* LSQCoverflowLayout.m */,
+				009FA52919C2654F0052ED2E /* LSQCoverflowCellView.h */,
+				009FA52A19C2654F0052ED2E /* LSQCoverflowCellView.m */,
+				00737BEA19C228E30012FA53 /* Libraries */,
+				00737BC519C21FD50012FA53 /* Supporting Files */,
+			);
+			name = Code;
+			path = LSQCoverflowLayout;
+			sourceTree = "<group>";
+		};
+		00737BC519C21FD50012FA53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00737BC619C21FD50012FA53 /* LSQCoverflowLayout-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		00737BD819C21FD50012FA53 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				00737BDE19C21FD50012FA53 /* LSQCoverflowLayoutTests.m */,
+				00737BD919C21FD50012FA53 /* Supporting Files */,
+			);
+			name = Tests;
+			path = LSQCoverflowLayoutTests;
+			sourceTree = "<group>";
+		};
+		00737BD919C21FD50012FA53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00737BDA19C21FD50012FA53 /* LSQCoverflowLayoutTests-Info.plist */,
+				00737BDB19C21FD50012FA53 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		00737BEA19C228E30012FA53 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				00737BEC19C228FC0012FA53 /* BSpline */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		00737BEC19C228FC0012FA53 /* BSpline */ = {
+			isa = PBXGroup;
+			children = (
+				00737C1619C24F070012FA53 /* BSplineLib.cpp */,
+				00737BED19C229120012FA53 /* BSpline.cpp */,
+				00737BEE19C229120012FA53 /* BSpline.h */,
+				00737BEF19C229120012FA53 /* BSplineBase.cpp */,
+				00737BF019C229120012FA53 /* BSplineBase.h */,
+			);
+			name = BSpline;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		00737C0E19C238990012FA53 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				009FA52B19C2654F0052ED2E /* LSQCoverflowCellView.h in Headers */,
+				00737C0F19C2389F0012FA53 /* LSQCoverflowLayout.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		00737BBE19C21FD50012FA53 /* LSQCoverflowLayout */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00737BE219C21FD50012FA53 /* Build configuration list for PBXNativeTarget "LSQCoverflowLayout" */;
+			buildPhases = (
+				00737BBB19C21FD50012FA53 /* Sources */,
+				00737BBC19C21FD50012FA53 /* Frameworks */,
+				00737C0E19C238990012FA53 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LSQCoverflowLayout;
+			productName = LSQCoverflowLayout;
+			productReference = 00737BBF19C21FD50012FA53 /* libLSQCoverflowLayout.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		00737BCE19C21FD50012FA53 /* LSQCoverflowLayoutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00737BE519C21FD50012FA53 /* Build configuration list for PBXNativeTarget "LSQCoverflowLayoutTests" */;
+			buildPhases = (
+				00737BCB19C21FD50012FA53 /* Sources */,
+				00737BCC19C21FD50012FA53 /* Frameworks */,
+				00737BCD19C21FD50012FA53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00737BD619C21FD50012FA53 /* PBXTargetDependency */,
+			);
+			name = LSQCoverflowLayoutTests;
+			productName = LSQCoverflowLayoutTests;
+			productReference = 00737BCF19C21FD50012FA53 /* LSQCoverflowLayoutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		00737BB719C21FD50012FA53 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Casual Underground";
+			};
+			buildConfigurationList = 00737BBA19C21FD50012FA53 /* Build configuration list for PBXProject "LSQCoverflowLayout" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 00737BB619C21FD50012FA53;
+			productRefGroup = 00737BC019C21FD50012FA53 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				00737BBE19C21FD50012FA53 /* LSQCoverflowLayout */,
+				00737BCE19C21FD50012FA53 /* LSQCoverflowLayoutTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00737BCD19C21FD50012FA53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00737BDD19C21FD50012FA53 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00737BBB19C21FD50012FA53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00737BCA19C21FD50012FA53 /* LSQCoverflowLayout.m in Sources */,
+				00737C1419C2420C0012FA53 /* SplineInterpolator.cpp in Sources */,
+				00737BF119C229120012FA53 /* BSpline.cpp in Sources */,
+				00737BF219C229120012FA53 /* BSplineBase.cpp in Sources */,
+				00737C1719C24F070012FA53 /* BSplineLib.cpp in Sources */,
+				009FA52C19C2654F0052ED2E /* LSQCoverflowCellView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00737BCB19C21FD50012FA53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00737BDF19C21FD50012FA53 /* LSQCoverflowLayoutTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00737BD619C21FD50012FA53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 00737BBE19C21FD50012FA53 /* LSQCoverflowLayout */;
+			targetProxy = 00737BD519C21FD50012FA53 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		00737BDB19C21FD50012FA53 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00737BDC19C21FD50012FA53 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		00737BE019C21FD50012FA53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		00737BE119C21FD50012FA53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		00737BE319C21FD50012FA53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/LSQCoverflowLayout.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LSQCoverflowLayout/LSQCoverflowLayout-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		00737BE419C21FD50012FA53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/LSQCoverflowLayout.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LSQCoverflowLayout/LSQCoverflowLayout-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		00737BE619C21FD50012FA53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LSQCoverflowLayout/LSQCoverflowLayout-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LSQCoverflowLayoutTests/LSQCoverflowLayoutTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		00737BE719C21FD50012FA53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LSQCoverflowLayout/LSQCoverflowLayout-Prefix.pch";
+				INFOPLIST_FILE = "LSQCoverflowLayoutTests/LSQCoverflowLayoutTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00737BBA19C21FD50012FA53 /* Build configuration list for PBXProject "LSQCoverflowLayout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00737BE019C21FD50012FA53 /* Debug */,
+				00737BE119C21FD50012FA53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00737BE219C21FD50012FA53 /* Build configuration list for PBXNativeTarget "LSQCoverflowLayout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00737BE319C21FD50012FA53 /* Debug */,
+				00737BE419C21FD50012FA53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00737BE519C21FD50012FA53 /* Build configuration list for PBXNativeTarget "LSQCoverflowLayoutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00737BE619C21FD50012FA53 /* Debug */,
+				00737BE719C21FD50012FA53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 00737BB719C21FD50012FA53 /* Project object */;
+}
