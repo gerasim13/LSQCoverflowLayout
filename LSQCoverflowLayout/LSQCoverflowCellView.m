@@ -12,7 +12,8 @@
 
 - (void)setup
 {
-    [self.layer setCornerRadius:12.0];
+    self.layer.cornerRadius = 12.0;
+    self.backgroundColor    = [UIColor clearColor];
 }
 
 - (id)initWithFrame:(CGRect)frame

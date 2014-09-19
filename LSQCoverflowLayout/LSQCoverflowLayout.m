@@ -33,8 +33,8 @@ static const CGFloat kHeaderHeight         = 28.0;
 static const CGFloat kFooterHeight         = 38.0;
 static const UInt32  kNumberOfVisibleItems = 10;
 
-static const NSString *kSuplementaryViewTypeHeader = @"Header Suplementary";
-static const NSString *kSuplementaryViewTypeFooter = @"Footer Suplementary";
+static NSString * const kSuplementaryViewTypeHeader = @"Header Suplementary";
+static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
 
 //_______________________________________________________________________________________________________________
 
