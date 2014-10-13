@@ -17,10 +17,10 @@
 		00737BDF19C21FD50012FA53 /* LSQCoverflowLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00737BDE19C21FD50012FA53 /* LSQCoverflowLayoutTests.m */; };
 		00737BF119C229120012FA53 /* BSpline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00737BED19C229120012FA53 /* BSpline.cpp */; };
 		00737BF219C229120012FA53 /* BSplineBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00737BEF19C229120012FA53 /* BSplineBase.cpp */; };
-		00737C0F19C2389F0012FA53 /* LSQCoverflowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 00737BC719C21FD50012FA53 /* LSQCoverflowLayout.h */; };
+		00737C0F19C2389F0012FA53 /* LSQCoverflowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 00737BC719C21FD50012FA53 /* LSQCoverflowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		00737C1419C2420C0012FA53 /* SplineInterpolator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00737C1219C2420C0012FA53 /* SplineInterpolator.cpp */; };
 		00737C1719C24F070012FA53 /* BSplineLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00737C1619C24F070012FA53 /* BSplineLib.cpp */; };
-		009FA52B19C2654F0052ED2E /* LSQCoverflowCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = 009FA52919C2654F0052ED2E /* LSQCoverflowCellView.h */; };
+		009FA52B19C2654F0052ED2E /* LSQCoverflowCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = 009FA52919C2654F0052ED2E /* LSQCoverflowCellView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		009FA52C19C2654F0052ED2E /* LSQCoverflowCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FA52A19C2654F0052ED2E /* LSQCoverflowCellView.m */; };
 /* End PBXBuildFile section */
 
@@ -337,6 +337,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -367,6 +368,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -378,6 +380,7 @@
 				DSTROOT = /tmp/LSQCoverflowLayout.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LSQCoverflowLayout/LSQCoverflowLayout-Prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -390,6 +393,7 @@
 				DSTROOT = /tmp/LSQCoverflowLayout.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LSQCoverflowLayout/LSQCoverflowLayout-Prefix.pch";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
