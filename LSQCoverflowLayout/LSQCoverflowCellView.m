@@ -13,6 +13,7 @@
 - (void)setup
 {
     self.layer.cornerRadius = 12.0;
+    self.imageView.opaque   = YES;
     self.backgroundColor    = [UIColor clearColor];
 }
 

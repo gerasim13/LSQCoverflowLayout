@@ -70,7 +70,7 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
     Float32 point2 = point1 * 2.18f;
     Float32 point3 = point2 * 3.64f;
     Float32 points[7] = { -point3, -point2, -point1, 0.0, point1, point2, point3 };
-    Float32 values[7] = { 70.0,  32.0, 60.0,  0.0, -60.0, -32.0, -70.0 };
+    Float32 values[7] = { 12.0,  48.0, 60.0,  0.0, -60.0, -48.0, -12.0 };
     SplineInterpolatorCreate(points, values, 7, &_rotationInterpolator);
 }
 
@@ -79,9 +79,10 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
     Float32 point1 = CGRectGetWidth([self.collectionView bounds]) * 0.001f;
     Float32 point2 = point1 * 2.8f;
     Float32 point3 = point2 * 9.4f;
-    Float32 points[7] = { -point3, -point2, -point1, 0.0, point1, point2, point3 };
-    Float32 values[7] = { 0.88, 0.92, 0.99, 1.0, 0.99, 0.92, 0.88 };
-    SplineInterpolatorCreate(points, values, 7, &_scaleInterpolator);
+    Float32 point4 = point3 * 12.4f;
+    Float32 points[9] = { -point4, -point3, -point2, -point1, 0.0, point1, point2, point3, point4 };
+    Float32 values[9] = { 0.1, 0.74, 0.92, 0.99, 1.0, 0.99, 0.92, 0.74, 0.1 };
+    SplineInterpolatorCreate(points, values, 9, &_scaleInterpolator);
 }
 
 - (void)initOpacityInterpolator
@@ -90,9 +91,10 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
     float point2 = point1 * 1.8f;
     float point3 = point2 * 2.12f;
     float point4 = point3 * 2.44f;
-    Float32 points[9] = { -point4, -point3, -point2, -point1, 0.0, point1, point2, point3, point4 };
-    Float32 values[9] = {  0.0, 0.5, 0.84,  0.94, 1.0, 0.94, 0.84, 0.5, 0.0f };
-    SplineInterpolatorCreate(points, values, 9, &_opacityInterpolator);
+    float point5 = point4 * 4.32f;
+    Float32 points[11] = { -point5, -point4, -point3, -point2, -point1, 0.0, point1, point2, point3, point4, point5 };
+    Float32 values[11] = { 0.0, 0.04, 0.5, 0.84,  0.94, 1.0, 0.94, 0.84, 0.5, 0.04, 0.0 };
+    SplineInterpolatorCreate(points, values, 11, &_opacityInterpolator);
 }
 
 - (instancetype)init
@@ -233,10 +235,19 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
 
 - (void)setCurrentIndex:(NSUInteger)index
 {
-    if (_currentIndex != (_currentIndex = index) &&
-        [[self.collectionView delegate] respondsToSelector:@selector(coverflowLayout:didChangeCurrentIndex:)])
+    if (_currentIndex != (_currentIndex = index))
     {
-        [(id<LSQCoverflowLayoutDelegate>)[self.collectionView delegate] coverflowLayout:self didChangeCurrentIndex:_currentIndex];
+//        // Select cell
+//        NSIndexPath *path = [NSIndexPath indexPathForItem:index inSection:0];
+//        [self.collectionView selectItemAtIndexPath:path
+//                                          animated:YES
+//                                    scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+        // Notify delegate
+        if ([[self.collectionView delegate] respondsToSelector:@selector(coverflowLayout:didChangeCurrentIndex:)])
+        {
+            id<LSQCoverflowLayoutDelegate> delegate = (id<LSQCoverflowLayoutDelegate>)[self.collectionView delegate];
+            [delegate coverflowLayout:self didChangeCurrentIndex:_currentIndex];
+        }
     }
 }
 
@@ -265,11 +276,11 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
         self.currentIndex = roundf(delta) == 0.0 ? index : _currentIndex;
         // Update basic attriutes
         attributes.center = CGPointMake(position + center, CGRectGetMidY([self.collectionView bounds]));
+        attributes.zIndex = (self.numberOfCells - ABS(_currentIndex - index));
         attributes.alpha  = opacity;
-        attributes.zIndex = self.numberOfCells - ABS(_currentIndex - index);
         // Apply 3D transform
         CATransform3D transform = CATransform3DIdentity;
-        transform.m34 = 1.0 / -850.0;
+        transform.m34           = 1.0 / -850.0;
         transform = CATransform3DScale(transform, scale, scale, 1.0);
         transform = CATransform3DTranslate(transform, self.itemSize.width * (delta > 0.0 ? 0.5 : -0.5), 0.0, 0.0);
         transform = CATransform3DRotate(transform, rotation * M_PI / 180.0, 0.0, 1.0, 0.0);
