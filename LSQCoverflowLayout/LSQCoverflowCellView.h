@@ -9,9 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LSQCoverflowCellView : UICollectionViewCell
-{
-}
-
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
-
 @end

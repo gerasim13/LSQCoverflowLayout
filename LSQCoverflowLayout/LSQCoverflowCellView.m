@@ -12,9 +12,8 @@
 
 - (void)setup
 {
-    self.layer.cornerRadius = 12.0;
+    self.layer.cornerRadius = 0.0;
     self.imageView.opaque   = YES;
-    self.backgroundColor    = [UIColor clearColor];
 }
 
 - (id)initWithFrame:(CGRect)frame
