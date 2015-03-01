@@ -10,4 +10,5 @@
 
 @interface LSQCoverflowCellView : UICollectionViewCell
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UILabel     *labelView;
 @end

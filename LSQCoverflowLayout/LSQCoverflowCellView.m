@@ -9,6 +9,8 @@
 #import "LSQCoverflowCellView.h"
 
 @implementation LSQCoverflowCellView
+@synthesize imageView;
+@synthesize labelView;
 
 - (void)setup
 {
