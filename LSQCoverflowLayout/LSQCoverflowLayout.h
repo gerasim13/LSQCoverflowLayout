@@ -18,18 +18,18 @@
 //_______________________________________________________________________________________________________________
 
 @protocol LSQCoverflowLayoutDelegate <NSObject>
-- (void)coverflowLayout:(LSQCoverflowLayout*)layout didChangeCurrentIndex:(NSUInteger)index;
+- (void)coverflowLayout:(LSQCoverflowLayout*)layout didChangeCurrentIndex:(NSInteger)index;
 @end
 
 //_______________________________________________________________________________________________________________
 
 @interface LSQCoverflowLayout : UICollectionViewFlowLayout
 
-@property (nonatomic, readonly) CGSize     collectionViewContentSize;
-@property (nonatomic, assign  ) NSUInteger currentIndex;
-@property (nonatomic, assign  ) BOOL       snapToCells;
+@property (nonatomic, readonly) CGSize    collectionViewContentSize;
+@property (nonatomic, assign  ) NSInteger currentIndex;
+@property (nonatomic, assign  ) BOOL      snapToCells;
 
-- (void)snapContentOffsetToCell:(NSUInteger)index
+- (void)snapContentOffsetToCell:(NSInteger)index
                        animated:(BOOL)animated;
 
 @end

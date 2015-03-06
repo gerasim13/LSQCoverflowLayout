@@ -10,6 +10,7 @@
 
 #import "LSQCoverflowLayout.h"
 #import "SplineInterpolator.h"
+#import <libkern/OSAtomic.h>
 
 //_______________________________________________________________________________________________________________
 
@@ -19,7 +20,7 @@
     SplineInterpolatorRef _rotationInterpolator;
     SplineInterpolatorRef _scaleInterpolator;
     SplineInterpolatorRef _opacityInterpolator;
-    NSUInteger            _currentIndex;
+    NSInteger             _currentIndex;
 }
 
 @property (nonatomic, readonly) NSInteger numberOfCells;
@@ -39,11 +40,11 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
 //_______________________________________________________________________________________________________________
 
 @implementation LSQCoverflowLayout
-@synthesize snapToCells = _snapToCells;
+@synthesize snapToCells  = _snapToCells;
+@synthesize currentIndex = _currentIndex;
 
 @dynamic collectionViewContentSize;
 @dynamic centerOffset;
-@dynamic currentIndex;
 @dynamic numberOfCells;
 
 //_______________________________________________________________________________________________________________
@@ -102,6 +103,7 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
     if (self = [super init])
     {
         self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        self.currentIndex    = -1;
     }
     return self;
 }
@@ -114,7 +116,7 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
     SplineInterpolatorDestroy(_opacityInterpolator);
 }
 
-- (void)snapContentOffsetToCell:(NSUInteger)index
+- (void)snapContentOffsetToCell:(NSInteger)index
                        animated:(BOOL)animated
 {
     CGPoint point1 = [self targetContentOffsetForCellAtIndex:index];
@@ -228,20 +230,14 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
     return CGRectGetWidth([self.collectionView bounds]) / (float)kNumberOfVisibleItems;
 }
 
-- (NSUInteger)currentIndex
+- (void)setCurrentIndex:(NSInteger)index
 {
-    return _currentIndex;
-}
-
-- (void)setCurrentIndex:(NSUInteger)index
-{
-    if (_currentIndex != (_currentIndex = index))
+    if (OSAtomicCompareAndSwap32((int32_t)_currentIndex, (int32_t)index, (volatile int32_t*)&_currentIndex))
     {
-//        // Select cell
-//        NSIndexPath *path = [NSIndexPath indexPathForItem:index inSection:0];
-//        [self.collectionView selectItemAtIndexPath:path
-//                                          animated:YES
-//                                    scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+        if (_currentIndex < 0)
+        {
+            return;
+        }
         // Notify delegate
         if ([[self.collectionView delegate] respondsToSelector:@selector(coverflowLayout:didChangeCurrentIndex:)])
         {
@@ -273,10 +269,13 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
         CGFloat opacity  = SplineInterpolatorProcess(_opacityInterpolator , delta);
         // Update current index
         // Analysis disable once CompareOfFloatsByEqualityOperator
-        self.currentIndex = roundf(delta) == 0.0 ? index : _currentIndex;
+        NSUInteger cellsCount = self.numberOfCells;
+        NSUInteger cellIndex  = roundf(delta) == 0.0 ? index : _currentIndex;
+        NSUInteger lastIndex  = cellsCount > 0 ? cellsCount - 1 : 0;
+        self.currentIndex     = cellsCount > cellIndex ? cellIndex : lastIndex;
         // Update basic attriutes
         attributes.center = CGPointMake(position + center, CGRectGetMidY([self.collectionView bounds]));
-        attributes.zIndex = (self.numberOfCells - ABS(_currentIndex - index));
+        attributes.zIndex = (cellsCount - ABS(_currentIndex - index));
         attributes.alpha  = opacity;
         // Apply 3D transform
         CATransform3D transform = CATransform3DIdentity;
