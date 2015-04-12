@@ -284,7 +284,7 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
         transform = CATransform3DTranslate(transform, self.itemSize.width * (delta > 0.0 ? 0.5 : -0.5), 0.0, 0.0);
         transform = CATransform3DRotate(transform, rotation * M_PI / 180.0, 0.0, 1.0, 0.0);
         transform = CATransform3DTranslate(transform, self.itemSize.width * (delta > 0.0 ? -0.5 : 0.5), 0.0, 0.0);
-        attributes.Transform3D = transform;
+        attributes.transform3D = transform;
     }
     // Return attributes
     return attributes;
