@@ -232,12 +232,8 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
 
 - (void)setCurrentIndex:(NSInteger)index
 {
-    if (OSAtomicCompareAndSwap32((int32_t)_currentIndex, (int32_t)index, (volatile int32_t*)&_currentIndex))
+    if (_currentIndex != (_currentIndex = index) && _currentIndex >= 0)
     {
-        if (_currentIndex < 0)
-        {
-            return;
-        }
         // Notify delegate
         if ([[self.collectionView delegate] respondsToSelector:@selector(coverflowLayout:didChangeCurrentIndex:)])
         {
