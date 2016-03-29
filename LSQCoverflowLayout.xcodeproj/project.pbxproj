@@ -379,6 +379,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/LSQCoverflowLayout.dst;
+				GCC_FAST_MATH = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LSQCoverflowLayout/LSQCoverflowLayout-Prefix.pch";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
@@ -391,7 +392,9 @@
 		00737BE419C21FD50012FA53 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				DSTROOT = /tmp/LSQCoverflowLayout.dst;
+				GCC_FAST_MATH = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LSQCoverflowLayout/LSQCoverflowLayout-Prefix.pch";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
