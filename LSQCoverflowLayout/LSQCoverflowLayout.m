@@ -32,7 +32,7 @@
 
 static const CGFloat kHeaderHeight         = 28.0;
 static const CGFloat kFooterHeight         = 38.0;
-static const UInt32  kNumberOfVisibleItems = 7;
+static const UInt32  kNumberOfVisibleItems = 5;
 
 static NSString * const kSuplementaryViewTypeHeader = @"Header Suplementary";
 static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
@@ -53,7 +53,7 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
 
 - (void)initPostionOffsetInterpolator
 {
-    Float32 point1 = 0.12f;
+    Float32 point1 = 0.14f;
     Float32 point2 = CGRectGetWidth([self.collectionView bounds]) * 0.001f;
     Float32 point3 = point2 * 2.2f;
     Float32 point4 = point3 * 2.6f;
@@ -61,7 +61,7 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
     Float32 value2 = value1 * 2.2f;
     Float32 value3 = value1 * 0.2f;
     Float32 points[9] = { -point4, -point3, -point2, -point1, 0.0, point1, point2, point3, point4 };
-    Float32 values[9] = { -value3, -value2, -value1, -0.4, 0, 0.4, value1, value2, value3 };
+    Float32 values[9] = { -value3, -value2, -value1, -0.4,    0.0, 0.4,    value1, value2, value3 };
     SplineInterpolatorCreate(points, values, 9, &_positionoffsetInterpolator);
 }
 
@@ -70,9 +70,14 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
     Float32 point1 = CGRectGetWidth([self.collectionView bounds]) * 0.001f;
     Float32 point2 = point1 * 2.18f;
     Float32 point3 = point2 * 3.64f;
-    Float32 points[7] = { -point3, -point2, -point1, 0.0, point1, point2, point3 };
-    Float32 values[7] = { 12.0,  48.0, 60.0,  0.0, -60.0, -48.0, -12.0 };
-    SplineInterpolatorCreate(points, values, 7, &_rotationInterpolator);
+    Float32 point4 = point3 * 3.64f;
+    Float32 value1 = 180.0f / kNumberOfVisibleItems;
+    Float32 value2 = value1 * 1.8f;
+    Float32 value3 = value2 * 1.6f;
+    Float32 value4 = value3 * 1.2f;
+    Float32 points[9] = { -point4, -point3, -point2, -point1, 0.0,  point1,  point2,  point3,  point4 };
+    Float32 values[9] = {  value4,  value3,  value2,  value1, 0.0, -value1, -value2, -value3, -value4 };
+    SplineInterpolatorCreate(points, values, 9, &_rotationInterpolator);
 }
 
 - (void)initScaleInterpolator
@@ -94,7 +99,7 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
     float point4 = point3 * 2.44f;
     float point5 = point4 * 4.32f;
     Float32 points[11] = { -point5, -point4, -point3, -point2, -point1, 0.0, point1, point2, point3, point4, point5 };
-    Float32 values[11] = { 0.0, 0.04, 0.5, 0.84,  0.94, 1.0, 0.94, 0.84, 0.5, 0.04, 0.0 };
+    Float32 values[11] = { 0.0, 0.04, 0.35, 0.84,  0.94, 1.0, 0.94, 0.84, 0.35, 0.04, 0.0 };
     SplineInterpolatorCreate(points, values, 11, &_opacityInterpolator);
 }
 
@@ -121,8 +126,7 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
 {
     CGPoint point1 = [self targetContentOffsetForCellAtIndex:index];
     CGPoint point2 = [self snappedContentOffset:point1];
-    [self.collectionView setContentOffset:point2
-                                 animated:animated];
+    [self.collectionView setContentOffset:point2 animated:animated];
 }
 
 //_______________________________________________________________________________________________________________
@@ -150,10 +154,11 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
 
 - (NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSUInteger cellsCount = self.numberOfCells;
+    NSUInteger      cellsCount = self.numberOfCells;
+    NSArray        *original   = [super layoutAttributesForElementsInRect:rect];
+    NSMutableArray *attribs    = [[NSMutableArray alloc] initWithArray:original copyItems:YES];
     if (cellsCount > 0)
     {
-        NSMutableArray *attribs = [NSMutableArray array];
         // Calculate range
         NSRange range;
         CGFloat space  = self.minimumInteritemSpacing;
@@ -176,10 +181,9 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
                                                                                         atIndexPath:indexPath];
         if (footer) [attribs addObject:footer];
         if (header) [attribs addObject:header];
-        // Return attributes
-        return [NSArray arrayWithArray:attribs];
     }
-    return nil;
+    // Return attributes
+    return [NSArray arrayWithArray:attribs];
 }
 
 - (void)prepareLayout
@@ -289,9 +293,8 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
 - (CGPoint)targetContentOffsetForCellAtIndex:(NSUInteger)index
 {
     CGPoint point = [self.collectionView contentOffset];
-    point.x = self.minimumInteritemSpacing * index;
-    return [self targetContentOffsetForProposedContentOffset:point
-                                       withScrollingVelocity:CGPointMake(0.5, 0.0)];
+    point.x       = self.minimumInteritemSpacing * index;
+    return [self targetContentOffsetForProposedContentOffset:point withScrollingVelocity:CGPointMake(0.5, 0.0)];
 }
 
 - (CGPoint)snappedContentOffset:(CGPoint)offset

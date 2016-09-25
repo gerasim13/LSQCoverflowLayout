@@ -15,6 +15,7 @@
 - (void)setup
 {
     self.layer.cornerRadius = 0.0;
+    self.layer.speed        = 1.8;
     self.imageView.opaque   = YES;
 }
 

@@ -46,8 +46,7 @@ void SplineInterpolatorDestroy(SplineInterpolatorRef interpolator)
     delete interpolator;
 }
 
-Float32 SplineInterpolatorProcess(SplineInterpolatorRef spline,
-                                  Float32 delta)
+Float32 SplineInterpolatorProcess(SplineInterpolatorRef spline, Float32 delta)
 {
     return spline->evaluate(delta);
 }
