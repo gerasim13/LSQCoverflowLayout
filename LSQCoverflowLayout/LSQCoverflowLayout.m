@@ -254,7 +254,7 @@ static NSString * const kSuplementaryViewTypeFooter = @"Footer Suplementary";
 - (UICollectionViewLayoutAttributes*)layoutAttributesForElementAtIndex:(NSUInteger)index
 {
     NSIndexPath                      *indexPath  = [NSIndexPath indexPathForItem:index inSection:0];
-    UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexPath];
+    UICollectionViewLayoutAttributes *attributes = [[self layoutAttributesForItemAtIndexPath:indexPath] copy];
     // Modify attributes
     if (attributes.representedElementCategory == UICollectionElementCategoryCell)
     {
