@@ -26,6 +26,8 @@
 @interface LSQCoverflowLayout : UICollectionViewFlowLayout
 
 @property (nonatomic, readonly) CGSize    collectionViewContentSize;
+/// Horizontal center-to-center distance between adjacent covers. Defaults to 40 points.
+@property (nonatomic, assign  ) CGFloat   coverSpacing;
 @property (nonatomic, assign  ) NSInteger currentIndex;
 @property (nonatomic, assign  ) BOOL      snapToCells;
 

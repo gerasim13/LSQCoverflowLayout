@@ -23,6 +23,8 @@
 		00737C1719C24F070012FA53 /* BSplineLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00737C1619C24F070012FA53 /* BSplineLib.cpp */; };
 		009FA52B19C2654F0052ED2E /* LSQCoverflowCellView.h in Headers */ = {isa = PBXBuildFile; fileRef = 009FA52919C2654F0052ED2E /* LSQCoverflowCellView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		009FA52C19C2654F0052ED2E /* LSQCoverflowCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 009FA52A19C2654F0052ED2E /* LSQCoverflowCellView.m */; };
+		A10000012900000100000003 /* LSQCoverflowView.h in Headers */ = {isa = PBXBuildFile; fileRef = A10000012900000100000001 /* LSQCoverflowView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A10000012900000100000004 /* LSQCoverflowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A10000012900000100000002 /* LSQCoverflowView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		00737C1619C24F070012FA53 /* BSplineLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BSplineLib.cpp; path = Libraries/BSpline/BSpline/BSplineLib.cpp; sourceTree = SOURCE_ROOT; };
 		009FA52919C2654F0052ED2E /* LSQCoverflowCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSQCoverflowCellView.h; sourceTree = "<group>"; };
 		009FA52A19C2654F0052ED2E /* LSQCoverflowCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSQCoverflowCellView.m; sourceTree = "<group>"; };
+		A10000012900000100000001 /* LSQCoverflowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSQCoverflowView.h; sourceTree = "<group>"; };
+		A10000012900000100000002 /* LSQCoverflowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSQCoverflowView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,8 @@
 				00737BC919C21FD50012FA53 /* LSQCoverflowLayout.m */,
 				009FA52919C2654F0052ED2E /* LSQCoverflowCellView.h */,
 				009FA52A19C2654F0052ED2E /* LSQCoverflowCellView.m */,
+				A10000012900000100000001 /* LSQCoverflowView.h */,
+				A10000012900000100000002 /* LSQCoverflowView.m */,
 				00737BEA19C228E30012FA53 /* Libraries */,
 				00737BC519C21FD50012FA53 /* Supporting Files */,
 			);
@@ -181,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				009FA52B19C2654F0052ED2E /* LSQCoverflowCellView.h in Headers */,
+				A10000012900000100000003 /* LSQCoverflowView.h in Headers */,
 				006B73161D51D1D9002275AB /* SplineInterpolator.h in Headers */,
 				00737C0F19C2389F0012FA53 /* LSQCoverflowLayout.h in Headers */,
 			);
@@ -273,6 +280,7 @@
 				00737BF219C229120012FA53 /* BSplineBase.cpp in Sources */,
 				00737C1719C24F070012FA53 /* BSplineLib.cpp in Sources */,
 				009FA52C19C2654F0052ED2E /* LSQCoverflowCellView.m in Sources */,
+				A10000012900000100000004 /* LSQCoverflowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +461,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "LSQCoverflowLayoutTests/LSQCoverflowLayoutTests-Info.plist";
+				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.casualunderground.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
@@ -470,6 +479,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LSQCoverflowLayout/LSQCoverflowLayout-Prefix.pch";
 				INFOPLIST_FILE = "LSQCoverflowLayoutTests/LSQCoverflowLayoutTests-Info.plist";
+				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.casualunderground.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
