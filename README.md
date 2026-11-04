@@ -32,3 +32,15 @@ Set `coverSpacing` on `LSQCoverflowView` (or directly on
 `LSQCoverflowLayout`) to change the horizontal center-to-center step between
 covers. It defaults to the historical 40 points. Runtime changes preserve the
 logical scroll position, including while a cover is flipped.
+
+`coverSize` and `flippedCoverSize` are independent. Either face may use any
+positive aspect ratio; the wrapper flips at the front size and then animates
+the container to the rear size, reversing that order when it closes.
+
+`coverVerticalAnchor` controls placement without changing the viewport:
+`0` aligns both faces to the top, `0.5` keeps the historical centered layout,
+and `1` aligns them to the bottom. The default is `0.5`; intermediate values
+are supported.
+
+Set this property on `LSQCoverflowView` when using two-sided covers. The wrapper
+keeps its layout and visible cover containers synchronized during resize/flip.

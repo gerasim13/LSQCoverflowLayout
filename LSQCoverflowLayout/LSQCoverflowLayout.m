@@ -19,6 +19,7 @@
     SplineInterpolatorRef _opacityInterpolator;
     NSInteger _currentIndex;
     CGFloat _coverSpacing;
+    CGFloat _coverVerticalAnchor;
 
     BOOL _hasCachedInterpolatorGeometry;
     CGSize _cachedBoundsSize;
@@ -30,6 +31,8 @@
 @property (nonatomic, readonly) NSInteger numberOfCells;
 @property (nonatomic, readonly) NSInteger numberOfVisibleItems;
 @property (nonatomic, readonly) CGFloat centerOffset;
+
+- (void)applyDefaultConfiguration;
 
 @end
 
@@ -57,12 +60,30 @@ static NSString * const LSQSupplementaryViewTypeFooter = @"Footer Suplementary";
     self = [super init];
     if (self)
     {
-        self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _coverSpacing = LSQDefaultCoverSpacing;
-        [super setMinimumInteritemSpacing:_coverSpacing];
+        [self applyDefaultConfiguration];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self)
+    {
+        _coverSpacing = [super minimumInteritemSpacing];
+        _coverVerticalAnchor = 0.5f;
         _currentIndex = -1;
     }
     return self;
+}
+
+- (void)applyDefaultConfiguration
+{
+    self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    _coverSpacing = LSQDefaultCoverSpacing;
+    _coverVerticalAnchor = 0.5f;
+    [super setMinimumInteritemSpacing:_coverSpacing];
+    _currentIndex = -1;
 }
 
 - (void)dealloc
@@ -352,6 +373,21 @@ static NSString * const LSQSupplementaryViewTypeFooter = @"Footer Suplementary";
     [self invalidateLayout];
 }
 
+- (void)setCoverVerticalAnchor:(CGFloat)coverVerticalAnchor
+{
+    if (!isfinite(coverVerticalAnchor))
+    {
+        return;
+    }
+    CGFloat clampedAnchor = MIN(1.0f, MAX(0.0f, coverVerticalAnchor));
+    if (_coverVerticalAnchor == clampedAnchor)
+    {
+        return;
+    }
+    _coverVerticalAnchor = clampedAnchor;
+    [self invalidateLayout];
+}
+
 // Keep UICollectionViewFlowLayout's inherited spacing API compatible with the
 // semantic cover-spacing property.
 - (CGFloat)minimumInteritemSpacing
@@ -434,7 +470,10 @@ static NSString * const LSQSupplementaryViewTypeFooter = @"Footer Suplementary";
     CGFloat scale = SplineInterpolatorProcess(_scaleInterpolator, delta);
     CGFloat opacity = SplineInterpolatorProcess(_opacityInterpolator, delta);
 
-    attributes.center = CGPointMake(position + center, CGRectGetMidY(bounds));
+    CGFloat itemHeight = attributes.size.height;
+    CGFloat viewportAnchorY = CGRectGetMinY(bounds) + self.coverVerticalAnchor * CGRectGetHeight(bounds);
+    CGFloat itemCenterY = viewportAnchorY + (0.5f - self.coverVerticalAnchor) * itemHeight;
+    attributes.center = CGPointMake(position + center, itemCenterY);
     attributes.zIndex = MAX(0, self.numberOfCells - labs(self.currentIndex - index));
     attributes.alpha = opacity;
 

@@ -58,6 +58,7 @@ static const NSTimeInterval LSQCoverflowResizeDuration = 0.3;
 @property (nonatomic, assign) BOOL backContentAccessibilityElementsWereHidden;
 
 - (void)updateContentAccessibilityForFlippedState;
+- (CGPoint)coverContainerCenterForSize:(CGSize)size;
 - (void)cancelTransitionPreservingFrontContent:(LSQCoverflowCellTransition *)transition
                                      generation:(NSUInteger)generation;
 - (void)resetToFrontStateRemovingContent:(BOOL)removeContent;
@@ -75,6 +76,7 @@ static const NSTimeInterval LSQCoverflowResizeDuration = 0.3;
 {
     self.layer.cornerRadius = 0.0;
     self.layer.speed = 1.8;
+    _coverVerticalAnchor = 0.5f;
     self.isAccessibilityElement = NO;
     self.clipsToBounds = NO;
     self.contentView.clipsToBounds = NO;
@@ -123,13 +125,30 @@ static const NSTimeInterval LSQCoverflowResizeDuration = 0.3;
     {
         self.coverContainerView.bounds = (CGRect){ CGPointZero, self.contentView.bounds.size };
     }
-    self.coverContainerView.center = CGPointMake(CGRectGetMidX(self.contentView.bounds),
-                                                 CGRectGetMidY(self.contentView.bounds));
+    self.coverContainerView.center = [self coverContainerCenterForSize:self.coverContainerView.bounds.size];
     self.frontContentView.frame = self.coverContainerView.bounds;
     self.backContentView.frame = self.coverContainerView.bounds;
 }
 
 #pragma mark - Content
+
+- (void)setCoverVerticalAnchor:(CGFloat)coverVerticalAnchor
+{
+    if (!isfinite(coverVerticalAnchor))
+    {
+        return;
+    }
+    CGFloat clampedAnchor = MIN(1.0f, MAX(0.0f, coverVerticalAnchor));
+    if (_coverVerticalAnchor == clampedAnchor)
+    {
+        return;
+    }
+    _coverVerticalAnchor = clampedAnchor;
+    if (self.coverContainerView)
+    {
+        [self setCoverContainerSize:self.coverContainerView.bounds.size];
+    }
+}
 
 - (void)updateContentAccessibilityForFlippedState
 {
@@ -212,10 +231,17 @@ static const NSTimeInterval LSQCoverflowResizeDuration = 0.3;
 - (void)setCoverContainerSize:(CGSize)size
 {
     self.coverContainerView.bounds = (CGRect){ CGPointZero, size };
-    self.coverContainerView.center = CGPointMake(CGRectGetMidX(self.contentView.bounds),
-                                                 CGRectGetMidY(self.contentView.bounds));
+    self.coverContainerView.center = [self coverContainerCenterForSize:size];
     self.frontContentView.frame = self.coverContainerView.bounds;
     self.backContentView.frame = self.coverContainerView.bounds;
+}
+
+- (CGPoint)coverContainerCenterForSize:(CGSize)size
+{
+    CGFloat baseHeight = CGRectGetHeight(self.contentView.bounds);
+    CGFloat centerY = self.coverVerticalAnchor * baseHeight +
+                      (0.5f - self.coverVerticalAnchor) * size.height;
+    return CGPointMake(CGRectGetMidX(self.contentView.bounds), centerY);
 }
 
 - (void)setBackContentSubviewsAlpha:(CGFloat)alpha

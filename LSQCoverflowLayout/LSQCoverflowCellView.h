@@ -22,6 +22,8 @@ typedef void (^LSQCoverflowCellTransitionCompletion)(BOOL finished);
 /// Keeps the face animation independent from the collection layout's 3D transform.
 @property (nonatomic, strong, readonly) UIView *coverContainerView;
 @property (nonatomic, assign, readonly, getter=isFlipped) BOOL flipped;
+/// Matches the normalized vertical anchor used by LSQCoverflowLayout.
+@property (nonatomic, assign) CGFloat coverVerticalAnchor;
 
 - (void)flipToBackWithSize:(CGSize)size
                   animated:(BOOL)animated

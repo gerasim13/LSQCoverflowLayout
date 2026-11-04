@@ -53,10 +53,16 @@ didFinishCloseAtIndex:(NSInteger)index
 @property (nonatomic, weak) id<LSQCoverflowViewDelegate> delegate;
 
 @property (nonatomic, strong, readonly) UICollectionView *collectionView;
+/// Configure vertical placement through coverVerticalAnchor so the layout and
+/// two-sided cell containers stay synchronized.
 @property (nonatomic, strong, readonly) LSQCoverflowLayout *layout;
 
+/// Rendered size of the host-provided front view. Independent of flippedCoverSize.
 @property (nonatomic, assign) CGSize coverSize;
+/// Rendered size of the host-provided back view. Independent of coverSize.
 @property (nonatomic, assign) CGSize flippedCoverSize;
+/// Normalized vertical face anchor: 0 = top, 0.5 = center, 1 = bottom. Defaults to 0.5.
+@property (nonatomic, assign) CGFloat coverVerticalAnchor;
 /// Horizontal center-to-center distance between adjacent covers. Defaults to 40 points.
 @property (nonatomic, assign) CGFloat coverSpacing;
 @property (nonatomic, assign, readonly) NSInteger currentIndex;

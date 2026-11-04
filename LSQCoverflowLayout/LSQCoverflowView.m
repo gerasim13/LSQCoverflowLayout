@@ -80,6 +80,7 @@ typedef NS_ENUM(NSInteger, LSQCoverflowViewTransitionKind)
 {
     _coverSize = CGSizeMake(LSQDefaultCoverWidth, LSQDefaultCoverWidth);
     _flippedCoverSize = CGSizeMake(LSQDefaultFlippedCoverWidth, LSQDefaultFlippedCoverWidth);
+    _coverVerticalAnchor = 0.5f;
     _currentIndex = -1;
     _flippedIndex = -1;
     _activeTransitionIndex = -1;
@@ -87,6 +88,7 @@ typedef NS_ENUM(NSInteger, LSQCoverflowViewTransitionKind)
 
     LSQCoverflowLayout *layout = [[LSQCoverflowLayout alloc] init];
     layout.itemSize = _coverSize;
+    layout.coverVerticalAnchor = _coverVerticalAnchor;
     layout.snapToCells = YES;
     self.layout = layout;
 
@@ -140,6 +142,25 @@ typedef NS_ENUM(NSInteger, LSQCoverflowViewTransitionKind)
         return;
     }
     _flippedCoverSize = flippedCoverSize;
+}
+
+- (void)setCoverVerticalAnchor:(CGFloat)coverVerticalAnchor
+{
+    if (!isfinite(coverVerticalAnchor))
+    {
+        return;
+    }
+    CGFloat clampedAnchor = MIN(1.0f, MAX(0.0f, coverVerticalAnchor));
+    if (_coverVerticalAnchor == clampedAnchor)
+    {
+        return;
+    }
+    _coverVerticalAnchor = clampedAnchor;
+    self.layout.coverVerticalAnchor = clampedAnchor;
+    for (LSQCoverflowCellView *cell in self.collectionView.visibleCells)
+    {
+        cell.coverVerticalAnchor = clampedAnchor;
+    }
 }
 
 - (CGFloat)coverSpacing
@@ -370,6 +391,7 @@ typedef NS_ENUM(NSInteger, LSQCoverflowViewTransitionKind)
 {
     LSQCoverflowCellView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:LSQCoverflowCellReuseIdentifier
                                                                            forIndexPath:indexPath];
+    cell.coverVerticalAnchor = self.coverVerticalAnchor;
     UIView *frontView = nil;
     if ([self.dataSource respondsToSelector:@selector(coverflowView:frontViewForCoverAtIndex:)])
     {

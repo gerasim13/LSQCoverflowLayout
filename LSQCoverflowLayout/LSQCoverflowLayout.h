@@ -28,6 +28,8 @@
 @property (nonatomic, readonly) CGSize    collectionViewContentSize;
 /// Horizontal center-to-center distance between adjacent covers. Defaults to 40 points.
 @property (nonatomic, assign  ) CGFloat   coverSpacing;
+/// Normalized vertical face anchor: 0 = top, 0.5 = center, 1 = bottom. Defaults to 0.5.
+@property (nonatomic, assign  ) CGFloat   coverVerticalAnchor;
 @property (nonatomic, assign  ) NSInteger currentIndex;
 @property (nonatomic, assign  ) BOOL      snapToCells;
 

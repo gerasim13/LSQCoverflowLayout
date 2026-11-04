@@ -233,7 +233,7 @@ didFinishCloseAtIndex:(NSInteger)index
     XCTAssertEqualObjects(cell.accessibilityElements, (@[front]));
 
     __block BOOL opened = NO;
-    [cell flipToBackWithSize:CGSizeMake(436.0, 436.0) animated:NO completion:^(BOOL finished) {
+    [cell flipToBackWithSize:CGSizeMake(436.0, 296.0) animated:NO completion:^(BOOL finished) {
         opened = finished;
     }];
     XCTAssertTrue(opened);
@@ -245,6 +245,9 @@ didFinishCloseAtIndex:(NSInteger)index
     XCTAssertFalse(back.accessibilityElementsHidden);
     XCTAssertEqualObjects(cell.accessibilityElements, (@[back]));
     XCTAssertEqualWithAccuracy(CGRectGetWidth(cell.coverContainerView.bounds), 436.0, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetHeight(cell.coverContainerView.bounds), 296.0, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetWidth(back.frame), 436.0, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetHeight(back.frame), 296.0, 0.001);
     CGPoint buttonPoint = [backButton convertPoint:CGPointMake(22.0, 22.0) toView:cell];
     XCTAssertFalse(CGRectContainsPoint(cell.bounds, buttonPoint));
     XCTAssertEqual([cell hitTest:buttonPoint withEvent:nil], backButton);
@@ -264,7 +267,7 @@ didFinishCloseAtIndex:(NSInteger)index
 
     UIView *interruptedBack = [[UIView alloc] init];
     cell.backContentView = interruptedBack;
-    [cell flipToBackWithSize:CGSizeMake(436.0, 436.0) animated:NO completion:nil];
+    [cell flipToBackWithSize:CGSizeMake(436.0, 296.0) animated:NO completion:nil];
     [cell prepareForReuse];
     XCTAssertFalse(cell.isFlipped);
     XCTAssertNil(cell.frontContentView);
@@ -275,6 +278,122 @@ didFinishCloseAtIndex:(NSInteger)index
 }
 
 #pragma mark - Wrapper bounds and transitions
+
+- (void)testWrapperSupportsIndependentFrontAndBackAspectRatios
+{
+    LSQCoverflowView *view = [self coverflowViewWithCount:1];
+    CGSize frontSize = CGSizeMake(240.0, 180.0);
+    CGSize backSize = CGSizeMake(436.0, 296.0);
+    view.coverSize = frontSize;
+    view.flippedCoverSize = backSize;
+    [view reloadData];
+    [view layoutIfNeeded];
+    [view.collectionView layoutIfNeeded];
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    LSQCoverflowCellView *cell = (LSQCoverflowCellView *)[view.collectionView cellForItemAtIndexPath:indexPath];
+    XCTAssertNotNil(cell);
+    XCTAssertTrue(CGSizeEqualToSize(view.layout.itemSize, frontSize));
+    XCTAssertTrue(CGSizeEqualToSize(cell.coverContainerView.bounds.size, frontSize));
+    XCTAssertTrue(CGSizeEqualToSize(cell.frontContentView.frame.size, frontSize));
+
+    __block BOOL opened = NO;
+    [view flipCurrentCoverAnimated:NO completion:^(BOOL finished) {
+        opened = finished;
+    }];
+    XCTAssertTrue(opened);
+    XCTAssertTrue(view.isFlipped);
+    XCTAssertTrue(CGSizeEqualToSize(cell.coverContainerView.bounds.size, backSize));
+    XCTAssertTrue(CGSizeEqualToSize(cell.backContentView.frame.size, backSize));
+
+    __block BOOL closed = NO;
+    [view closeCurrentCoverAnimated:NO completion:^(BOOL finished) {
+        closed = finished;
+    }];
+    XCTAssertTrue(closed);
+    XCTAssertFalse(view.isFlipped);
+    XCTAssertTrue(CGSizeEqualToSize(cell.coverContainerView.bounds.size, frontSize));
+    XCTAssertTrue(CGSizeEqualToSize(cell.frontContentView.frame.size, frontSize));
+    XCTAssertNil(cell.backContentView);
+}
+
+- (void)testConfigurableVerticalAnchorKeepsFixedViewportAndRestoresCenteredLayout
+{
+    self.dataSource.count = 1;
+    CGSize frontSize = CGSizeMake(250.0, 240.0);
+    CGSize rearSize = CGSizeMake(360.0, 290.0);
+    CGFloat viewportHeight = 320.0;
+    LSQCoverflowView *view = [[LSQCoverflowView alloc] initWithFrame:CGRectMake(0.0, 0.0,
+                                                                              1024.0, viewportHeight)];
+    view.dataSource = self.dataSource;
+    view.delegate = self.delegate;
+    view.coverSize = frontSize;
+    view.flippedCoverSize = rearSize;
+    view.coverVerticalAnchor = 0.0;
+    [self.window addSubview:view];
+    [view reloadData];
+    [view layoutIfNeeded];
+    [view.collectionView layoutIfNeeded];
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    LSQCoverflowCellView *cell = (LSQCoverflowCellView *)[view.collectionView cellForItemAtIndexPath:indexPath];
+    XCTAssertNotNil(cell);
+    XCTAssertEqualWithAccuracy(CGRectGetHeight(view.bounds), viewportHeight, 0.001);
+    XCTAssertEqualWithAccuracy(view.layout.coverVerticalAnchor, 0.0, 0.001);
+    XCTAssertEqualWithAccuracy(cell.center.y - CGRectGetHeight(cell.bounds) * 0.5, 0.0, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetMinY(cell.coverContainerView.frame), 0.0, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetHeight(cell.coverContainerView.frame), frontSize.height, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetWidth(cell.coverContainerView.frame), frontSize.width, 0.001);
+
+    __block BOOL opened = NO;
+    [view flipCurrentCoverAnimated:NO completion:^(BOOL finished) {
+        opened = finished;
+    }];
+    XCTAssertTrue(opened);
+    XCTAssertEqualWithAccuracy(CGRectGetHeight(view.bounds), viewportHeight, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetMinY(cell.coverContainerView.frame), 0.0, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetHeight(cell.coverContainerView.frame), rearSize.height, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetWidth(cell.coverContainerView.frame), rearSize.width, 0.001);
+
+    UIButton *bottomButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    bottomButton.frame = CGRectMake(10.0, 242.0, 44.0, 44.0);
+    [cell.backContentView addSubview:bottomButton];
+    CGPoint bottomButtonPoint = [bottomButton convertPoint:CGPointMake(22.0, 22.0) toView:cell];
+    XCTAssertFalse(CGRectContainsPoint(cell.bounds, bottomButtonPoint));
+    XCTAssertEqual([cell hitTest:bottomButtonPoint withEvent:nil], bottomButton);
+
+    __block BOOL closed = NO;
+    [view closeCurrentCoverAnimated:NO completion:^(BOOL finished) {
+        closed = finished;
+    }];
+    XCTAssertTrue(closed);
+    XCTAssertEqualWithAccuracy(CGRectGetMinY(cell.coverContainerView.frame), 0.0, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetHeight(cell.coverContainerView.frame), frontSize.height, 0.001);
+
+    view.coverVerticalAnchor = 0.5;
+    [view.collectionView layoutIfNeeded];
+    XCTAssertEqualWithAccuracy(cell.center.y - CGRectGetHeight(cell.bounds) * 0.5,
+                               (viewportHeight - frontSize.height) * 0.5, 0.001);
+    XCTAssertEqualWithAccuracy(CGRectGetMinY(cell.coverContainerView.frame), 0.0, 0.001);
+}
+
+- (void)testDecodedLayoutPreservesArchivedFlowConfigurationAndLegacyAnchorDefault
+{
+    LSQCoverflowLayout *layout = [[LSQCoverflowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.minimumInteritemSpacing = 73.0;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:layout];
+    LSQCoverflowLayout *decoded = [NSKeyedUnarchiver unarchiveObjectWithData:archive];
+#pragma clang diagnostic pop
+
+    XCTAssertNotNil(decoded);
+    XCTAssertEqual(decoded.scrollDirection, UICollectionViewScrollDirectionVertical);
+    XCTAssertEqualWithAccuracy(decoded.minimumInteritemSpacing, 73.0, 0.001);
+    XCTAssertEqualWithAccuracy(decoded.coverSpacing, 73.0, 0.001);
+    XCTAssertEqualWithAccuracy(decoded.coverVerticalAnchor, 0.5, 0.001);
+}
 
 - (void)testCoverSpacingDefaultsToHistoricalValueAndReflowsCurrentCover
 {
